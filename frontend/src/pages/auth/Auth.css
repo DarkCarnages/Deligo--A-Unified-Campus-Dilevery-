@@ -1,0 +1,51 @@
+.auth-page {
+  min-height: calc(100vh - 56px); display: flex; align-items: center;
+  justify-content: center; padding: 24px 16px; background: var(--bg);
+}
+.auth-card {
+  width: 100%; max-width: 420px; background: #fff;
+  box-shadow: var(--shadow-md); padding: 32px;
+}
+.auth-card-wide { max-width: 640px; }
+.auth-header { text-align: center; margin-bottom: 24px; }
+.auth-logo {
+  width: 48px; height: 48px; border-radius: 8px; margin: 0 auto 12px;
+  background: var(--primary); display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 700; color: #fff;
+}
+.auth-header h1 { font-size: 22px; font-weight: 500; margin-bottom: 4px; }
+.auth-header p { color: var(--text-muted); font-size: 14px; }
+.auth-form { display: flex; flex-direction: column; gap: 0; }
+.auth-footer { text-align: center; margin-top: 20px; color: var(--text-muted); font-size: 14px; }
+.auth-footer a { color: var(--primary); font-weight: 500; }
+
+/* Role selector */
+.role-selector { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 20px; }
+.role-btn {
+  display: flex; flex-direction: column; gap: 4px; text-align: left;
+  padding: 10px; border-radius: var(--radius); cursor: pointer;
+  background: var(--bg); border: 1px solid var(--border); transition: var(--transition);
+}
+.role-btn strong { font-size: 13px; color: var(--text); }
+.role-btn span { font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+.role-btn:hover { border-color: var(--primary); }
+.role-btn.active { border-color: var(--primary); background: var(--primary-light); }
+.role-btn.active strong { color: var(--primary); }
+
+/* Demo accounts */
+.demo-accounts { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); }
+.demo-title { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; margin-bottom: 8px; text-align: center; }
+.demo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+.demo-btn {
+  display: flex; flex-direction: column; gap: 2px; padding: 8px 10px;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); cursor: pointer; text-align: left; transition: var(--transition);
+}
+.demo-btn strong { font-size: 12px; color: var(--primary); }
+.demo-btn span { font-size: 11px; color: var(--text-muted); font-family: monospace; }
+.demo-btn:hover { border-color: var(--primary); background: var(--primary-light); }
+
+@media (max-width: 480px) {
+  .role-selector { grid-template-columns: 1fr; }
+  .auth-card { padding: 20px; }
+}

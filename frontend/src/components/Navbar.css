@@ -1,0 +1,81 @@
+.navbar {
+  position: sticky; top: 0; z-index: 1000;
+  background: var(--bg-header);
+  height: 56px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.navbar-inner {
+  max-width: 1300px; margin: 0 auto; padding: 0 16px;
+  height: 100%; display: flex; align-items: center; gap: 16px;
+}
+.navbar-brand { display: flex; align-items: center; gap: 6px; text-decoration: none; flex-shrink: 0; }
+.brand-icon {
+  width: 28px; height: 28px; border-radius: 4px; font-weight: 700; font-size: 14px;
+  background: #fff; display: flex; align-items: center; justify-content: center;
+  color: var(--primary); font-family: 'Roboto', sans-serif;
+}
+.brand-name { font-weight: 700; font-size: 18px; color: #fff; font-style: italic; letter-spacing: -0.5px; }
+.navbar-links { display: flex; align-items: center; gap: 2px; flex: 1; margin-left: 24px; }
+.navbar-links a {
+  padding: 6px 14px; border-radius: var(--radius-sm); color: rgba(255,255,255,0.85);
+  font-size: 14px; font-weight: 500; transition: var(--transition); text-decoration: none;
+}
+.navbar-links a:hover, .navbar-links a.active { color: #fff; background: rgba(255,255,255,0.12); }
+.navbar-actions { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.cart-btn, .notif-btn {
+  position: relative; width: 36px; height: 36px; border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.12); border: none;
+  display: flex; align-items: center; justify-content: center; color: #fff;
+  transition: var(--transition); cursor: pointer;
+}
+.cart-btn:hover, .notif-btn:hover { background: rgba(255,255,255,0.2); }
+.cart-count, .notif-badge {
+  position: absolute; top: -4px; right: -4px;
+  background: var(--danger); color: #fff;
+  border-radius: 50%; font-size: 10px; font-weight: 700;
+  min-width: 16px; height: 16px; display: flex; align-items: center; justify-content: center;
+  padding: 0 3px;
+}
+.notif-badge { background: var(--secondary); }
+.user-menu { position: relative; }
+.user-avatar {
+  width: 32px; height: 32px; border-radius: 50%; cursor: pointer;
+  background: #fff; display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 14px; color: var(--primary); text-transform: uppercase;
+}
+.user-avatar:hover { box-shadow: 0 0 0 2px rgba(255,255,255,0.3); }
+.user-dropdown {
+  position: absolute; top: calc(100% + 8px); right: 0; min-width: 200px;
+  background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 8px; box-shadow: var(--shadow-lg);
+  opacity: 0; pointer-events: none; transform: translateY(-4px);
+  transition: all 0.15s ease;
+}
+.user-menu:hover .user-dropdown { opacity: 1; pointer-events: all; transform: translateY(0); }
+.user-info { display: flex; flex-direction: column; gap: 4px; padding: 4px 8px; }
+.user-info strong { font-size: 14px; color: var(--text); }
+.logout-btn {
+  width: 100%; padding: 8px; background: #fff; color: var(--danger);
+  border-radius: var(--radius-sm); font-size: 14px; font-weight: 500;
+  cursor: pointer; border: 1px solid #ffcdd2; text-align: center;
+}
+.logout-btn:hover { background: #ffebee; }
+.menu-toggle {
+  display: none; flex-direction: column; gap: 4px; background: none;
+  padding: 6px; cursor: pointer;
+}
+.menu-toggle span { width: 20px; height: 2px; background: #fff; border-radius: 1px; }
+.mobile-menu {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 8px 16px 12px; background: var(--bg-header);
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.mobile-menu a {
+  padding: 10px 12px; border-radius: var(--radius-sm); color: rgba(255,255,255,0.9);
+  font-size: 14px; font-weight: 500; text-decoration: none;
+}
+.mobile-menu a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+@media (max-width: 768px) {
+  .menu-toggle { display: flex; }
+  .navbar-links { display: none; }
+}

@@ -1,0 +1,94 @@
+# =========================
+# Django / Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+
+# Django stuff
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Media & Static build files
+media/
+staticfiles/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Mypy / Ruff / Pyright
+.mypy_cache/
+.ruff_cache/
+.pyright/
+
+# VS Code / JetBrains
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# =========================
+# React / Node.js
+# =========================
+node_modules/
+
+# React build folders
+build/
+dist/
+
+# npm/yarn logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# package manager files
+.pnpm-store/
+
+# Environment variables
+frontend/.env
+frontend/.env.*
+
+# Cache
+.cache/
+.parcel-cache/
+
+# =========================
+# Common
+# =========================
+*.swp
+*.swo
+*.tmp
+*.bak
+
+# =========================
+# Optional uploads
+# =========================
+uploads/
+
+
+*.txt
+walkthrough.md
+
