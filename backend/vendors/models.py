@@ -9,6 +9,9 @@ class VendorProfile(models.Model):
     logo = models.ImageField(upload_to='vendor_logos/', blank=True, null=True)
     is_approved = models.BooleanField(default=False)
     address = models.TextField(blank=True)
+
+    # updateion 
+    total_revenue = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

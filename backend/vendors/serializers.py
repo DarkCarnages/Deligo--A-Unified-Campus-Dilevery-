@@ -10,7 +10,7 @@ class VendorProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = VendorProfile
         fields = ['id', 'user', 'shop_name', 'description', 'logo', 'logo_url',
-                  'is_approved', 'address', 'created_at']
+                  'is_approved', 'address', 'total_revenue','created_at']
         read_only_fields = ['id', 'is_approved', 'created_at', 'user']
 
     def get_logo_url(self, obj):

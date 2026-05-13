@@ -14,7 +14,7 @@ export default function AdminOrders() {
     Promise.all([
       API.get('/orders/').then(r => setOrders(r.data)),
       API.get('/auth/delivery-partners/').then(r => setPartners(r.data)),
-    ]).catch(() => {}).finally(() => setLoading(false));
+    ]).catch(() => { }).finally(() => setLoading(false));
   }, []);
 
   const assignDelivery = async (orderId) => {
@@ -75,10 +75,33 @@ export default function AdminOrders() {
                     onClick={() => assignDelivery(order.order_id)}>Assign</button>
                 </>
               )}
-              {order.delivery_partner_detail && (
+              {/* {order.delivery_partner_detail && (
                 <span style={{ fontSize: '0.82rem', color: 'var(--accent)' }}>
                   Delivery: {order.delivery_partner_detail.name} · {order.delivery_partner_detail.phone}
                 </span>
+              )} */}
+
+              {order.delivery_partner_detail && (
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+
+                  <span style={{ fontSize: '0.82rem', color: 'var(--accent)' }}>
+                    Delivery: {order.delivery_partner_detail.name} · {order.delivery_partner_detail.phone}
+                  </span>
+
+                  <span
+                    style={{
+                      background: '#dcfce7',
+                      color: '#166534',
+                      padding: '0.25rem 0.5rem',
+                      borderRadius: '999px',
+                      fontSize: '0.72rem',
+                      fontWeight: 600,
+                    }}
+                  >
+                    🚴 Auto Assigned
+                  </span>
+
+                </div>
               )}
               {['PLACED'].includes(order.status) && (
                 <button className="btn btn-danger btn-sm" onClick={() => updateStatus(order.order_id, 'CANCELLED')}>Cancel Order</button>

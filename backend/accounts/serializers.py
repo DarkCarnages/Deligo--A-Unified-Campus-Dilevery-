@@ -45,7 +45,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'email', 'first_name', 'last_name',
-                  'role', 'phone_number', 'profile_picture', 'vendor_profile', 'created_at']
+                  'role', 'phone_number', 'profile_picture', 'vendor_profile', 'created_at',"is_active"]
         read_only_fields = ['id', 'created_at', 'role']
 
     def get_vendor_profile(self, obj):

@@ -32,7 +32,10 @@ export default function LoginPage() {
       <div className="auth-glow" />
       <div className="auth-card card">
         <div className="auth-header">
-          <div className="auth-logo">D</div>
+          {/* <div className="auth-logo">D</div> */}
+          <div className="auth-logo">
+          <img src="/logo.png" alt="Deligo Logo" />
+          </div>
           <h1>Welcome Back</h1>
           <p>Sign in to your Deligo account</p>
         </div>

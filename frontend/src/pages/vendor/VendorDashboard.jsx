@@ -14,22 +14,58 @@ const STATUS_BG = {
   READY: '#ede9fe', OUT_FOR_DELIVERY: '#e0f2fe', DELIVERED: '#d1fae5', CANCELLED: '#fee2e2',
 };
 
+// function AnimatedNumber({ value }) {
+//   const [display, setDisplay] = useState(0);
+//   useEffect(() => {
+//     const num = parseFloat(value) || 0;
+//     let start = 0;
+//     const step = num / 30;
+//     const timer = setInterval(() => {
+//       start = Math.min(start + step, num);
+//       setDisplay(start);
+//       if (start >= num) clearInterval(timer);
+//     }, 20);
+//     return () => clearInterval(timer);
+//   }, [value]);
+//   return <span>{typeof value === 'string' && value.startsWith('₹')
+//     ? `₹${parseFloat(display).toFixed(0)}`
+//     : Math.round(display)}</span>;
+// }
+
 function AnimatedNumber({ value }) {
   const [display, setDisplay] = useState(0);
+
   useEffect(() => {
-    const num = parseFloat(value) || 0;
+    const numericValue =
+      typeof value === 'string'
+        ? parseFloat(value.replace(/[^\d.-]/g, ''))
+        : value || 0;
+
     let start = 0;
-    const step = num / 30;
+    const step = numericValue / 30;
+
     const timer = setInterval(() => {
-      start = Math.min(start + step, num);
+      start = Math.min(start + step, numericValue);
       setDisplay(start);
-      if (start >= num) clearInterval(timer);
+
+      if (start >= numericValue) {
+        clearInterval(timer);
+      }
     }, 20);
+
     return () => clearInterval(timer);
   }, [value]);
-  return <span>{typeof value === 'string' && value.startsWith('₹')
-    ? `₹${parseFloat(display).toFixed(0)}`
-    : Math.round(display)}</span>;
+
+  const isCurrency =
+    typeof value === 'string' && value.includes('₹');
+
+  return (
+    <span>
+      {isCurrency
+        ? `₹${display.toFixed(0)}`
+        : Math.round(display)}
+    </span>
+  );
 }
 
 export default function VendorDashboard() {
@@ -42,7 +78,7 @@ export default function VendorDashboard() {
     Promise.all([
       API.get('/orders/'),
       API.get('/vendors/profile/'),
-    ]).then(([o, p]) => { setOrders(o.data); setProfile(p.data); })
+    ]).then(([o, p]) => { console.log("Profile Data:",p.data); setOrders(o.data); setProfile(p.data); })
       .catch(() => {}).finally(() => setLoading(false));
   }, []);
 
@@ -50,7 +86,8 @@ export default function VendorDashboard() {
     total: orders.length,
     pending: orders.filter(o => ['PLACED','ACCEPTED','PREPARING','READY'].includes(o.status)).length,
     delivered: orders.filter(o => o.status === 'DELIVERED').length,
-    revenue: orders.filter(o => o.status === 'DELIVERED').reduce((s, o) => s + parseFloat(o.total_price), 0).toFixed(0),
+    // revenue: orders.filter(o => o.status === 'DELIVERED').reduce((s, o) => s + parseFloat(o.total_price), 0).toFixed(0),
+    revenue: parseFloat(profile?.total_revenue || 0).toFixed(0),
     cancelled: orders.filter(o => o.status === 'CANCELLED').length,
   };
 

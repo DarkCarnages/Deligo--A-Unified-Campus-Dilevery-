@@ -33,7 +33,8 @@ export default function Navbar() {
     <nav className="navbar">
       <div className="navbar-inner">
         <Link to={getRoleHome()} className="navbar-brand">
-          <span className="brand-icon">D</span>
+          {/* <span className="brand-icon">D</span> */}
+          <img src="/logo.png" alt="Deligo Logo" className="brand-icon" />
           <span className="brand-name">Deligo</span>
         </Link>
 
@@ -68,7 +69,19 @@ export default function Navbar() {
                 {cart.total_items > 0 && <span className="cart-count">{cart.total_items}</span>}
               </Link>
             )}
-            <button className="notif-btn" onClick={() => navigate(user.role === 'CUSTOMER' ? '/orders' : getRoleHome())}>
+            {/* <button className="notif-btn" onClick={() => navigate(user.role === 'CUSTOMER' ? '/orders' : getRoleHome())}> */}
+              <button
+              className="notif-btn"
+              onClick={async () => {
+
+                try {
+                  await API.put('/notifications/mark-all-read/');
+                  setNotifCount(0);
+                } catch {}
+
+                navigate(user.role === 'CUSTOMER' ? '/orders' : getRoleHome());
+              }}
+              >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
               {notifCount > 0 && <span className="notif-badge">{notifCount}</span>}
             </button>
@@ -113,7 +126,21 @@ export default function Navbar() {
             <Link to="/admin/delivery" onClick={() => setMenuOpen(false)}>Delivery</Link>
             <Link to="/admin/zones" onClick={() => setMenuOpen(false)}>Zones</Link>
           </>}
-          <button onClick={() => { logout(); setMenuOpen(false); }} className="logout-btn" style={{ marginTop: 4 }}>Logout</button>
+          {/* <button onClick={() => { logout(); setMenuOpen(false); }} className="logout-btn" style={{ marginTop: 4 }}>Logout</button> */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setMenuOpen(false);
+            
+              setTimeout(() => {
+                logout();
+              }, 0);
+            }}
+            className="logout-btn"
+            style={{ marginTop: 4 }}
+>         
+            Logout
+            </button>
         </div>
       )}
     </nav>

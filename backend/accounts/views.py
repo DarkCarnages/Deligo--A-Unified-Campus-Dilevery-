@@ -110,6 +110,7 @@ class DeliveryPartnersView(APIView):
     def get(self, request):
         if request.user.role != 'ADMIN':
             return Response({'error': 'Forbidden'}, status=403)
+        #partners = User.objects.filter(role='DELIVERY', is_active=True)
         partners = User.objects.filter(role='DELIVERY', is_active=True)
         serializer = UserSerializer(partners, many=True, context={'request': request})
         return Response(serializer.data)

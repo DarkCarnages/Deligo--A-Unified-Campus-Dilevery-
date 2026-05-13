@@ -128,3 +128,8 @@ DEFAULT_FROM_EMAIL = 'noreply@deligo.campus'
 # Razorpay - Test keys (replace with real keys in production)
 RAZORPAY_KEY_ID = 'rzp_test_placeholder_key_id'
 RAZORPAY_KEY_SECRET = 'placeholder_razorpay_secret_key'
+
+
+
+# username deligoadmin
+#pass deligo123

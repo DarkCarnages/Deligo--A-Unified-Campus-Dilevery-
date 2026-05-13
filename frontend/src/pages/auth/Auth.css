@@ -49,3 +49,14 @@
   .role-selector { grid-template-columns: 1fr; }
   .auth-card { padding: 20px; }
 }
+.auth-logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-logo img{
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}

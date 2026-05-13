@@ -8,7 +8,8 @@ from cart.models import Cart
 from campus.models import CampusZone
 from notifications.utils import notify_order_placed, notify_order_status_changed
 from accounts.models import User
-
+from .utils import  auto_assign_delivery_partner
+from django.db import models
 
 class OrderListView(APIView):
     permission_classes = [IsAuthenticated]
@@ -181,6 +182,22 @@ class OrderStatusUpdateView(APIView):
             }, status=400)
 
         order.status = new_status
+        #changes 
+        if new_status == 'READY' and not order.delivery_partner:
+            auto_assign_delivery_partner(order)
+
+            
+        if new_status == 'DELIVERED' and not order.is_paid:
+            
+            order.is_paid= True
+
+            for item in order.items.all():
+                vendor=item.vendor
+
+                if vendor:
+                    vendor.total_revenue += item.subtotal
+                    vendor.save()
+        #till here
         order.save()
         notify_order_status_changed(order)
 
@@ -224,6 +241,7 @@ class AdminStatsView(APIView):
             'approved_vendors': VendorProfile.objects.filter(is_approved=True).count(),
             'total_products': Product.objects.count(),
             'orders_by_status': {},
+            'total_revenue': Order.objects.filter(is_paid=True).aggregate(total=models.Sum('total_price'))['total'] or 0,
         }
         for status_code, _ in Order.STATUS_CHOICES:
             stats['orders_by_status'][status_code] = Order.objects.filter(status=status_code).count()

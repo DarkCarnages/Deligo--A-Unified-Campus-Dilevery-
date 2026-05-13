@@ -48,7 +48,10 @@ export default function RegisterPage() {
       <div className="auth-glow" />
       <div className="auth-card auth-card-wide card">
         <div className="auth-header">
-          <div className="auth-logo">D</div>
+          {/* <div className="auth-logo">D</div> */}
+          <div className="auth-logo">
+          <img src="/logo.png" alt="Deligo Logo" />
+          </div>
           <h1>Create Account</h1>
           <p>Join the Deligo campus delivery network</p>
         </div>
